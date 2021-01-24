@@ -33,5 +33,18 @@ class Pokemon(models.Model):
     def create_pokemon_from_json(cls, pokemon_json: dict):
         return cls.objects.create(id=pokemon_json['id'], name=pokemon_json['name'])
 
+    @classmethod
+    def find_pokemon_by_name(cls, name):
+        pokemons = cls.objects.filter(name=name)
+        if len(pokemons) == 0:
+            try:
+                return cls.create_pokemon_from_json(
+                    requests.get(f'https://pokeapi.co/api/v2/pokemon/{name}').json()
+                )
+            except:
+                return None
+        else:
+            return pokemons[0]
+
     def __str__(self):
         return f"Pokemon {self.name}"

@@ -13,11 +13,11 @@
         <div class="pokemon" id="pokemon-{{pokemon.id}}">
             <h3>{{ pokemon.name }}</h3>
             <a href="{% url 'Pokemons:remove_pokemon' pokemon.id %}">
-            <button>Добавить</button>
+            <button>Удалить</button>
             </a>
         </div>
         {% endfor %}
-        <h2>Покемоны на выбор:</h2>
+        <h2>Предлагаем вам:</h2>
         {% for pokemon in other_pokemons %}
         <div class="pokemon" id="pokemon-{{pokemon.id}}">
             <h3>{{ pokemon.name }}</h3>
@@ -29,10 +29,12 @@
     </div>
 </section>
 <section>
-    <form id="find_pokemon" action="{% url 'Pokemon:find_pokemon'  %}" method="post" name="find_pokemon">
-        {% csrf token %}
-        <label for="pokemon" id="label_pokemon">Покемон:   </label>
-        <input type="text" name="pokemon" id="pokemon_box">
+    <br/>
+    <p>Здесь вы можете найти покемона по имени.<br/>Просто введите его имя и нажмите "Найти и добавить".</p>
+    <form id="find_pokemon" action="{% url 'Pokemons:find_pokemon'  %}" method="post" name="find_pokemon">
+        {% csrf_token %}
+        <label for="pokemon_name" id="label_pokemon">Имя покемона:   </label>
+        <input type="text" name="pokemon_name" id="pokemon_box">
         <input type="submit" name="submit" id="find" value="Найти и добавить">
         {% if message %}
         <p id="message">{{message}}</p>
