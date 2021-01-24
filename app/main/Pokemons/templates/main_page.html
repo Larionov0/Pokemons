@@ -5,23 +5,38 @@
 {% endblock %}
 
 {% block content %}
-<h1>Добро пожаловать в мир покемонов!</h1>
-<div>
-    <h2>Ваши покемоны:</h2>
-    {% for pokemon in pokemons %}
-    <div class="pokemon" id="pokemon-{{pokemon.id}}">
-        <h3>{{ pokemon.name }}</h3>
-        <button>Удалить</button>
+<section>
+    <h1>Добро пожаловать в мир покемонов!</h1>
+    <div>
+        <h2>Ваши покемоны:</h2>
+        {% for pokemon in pokemons %}
+        <div class="pokemon" id="pokemon-{{pokemon.id}}">
+            <h3>{{ pokemon.name }}</h3>
+            <a href="{% url 'Pokemons:remove_pokemon' pokemon.id %}">
+            <button>Добавить</button>
+            </a>
+        </div>
+        {% endfor %}
+        <h2>Покемоны на выбор:</h2>
+        {% for pokemon in other_pokemons %}
+        <div class="pokemon" id="pokemon-{{pokemon.id}}">
+            <h3>{{ pokemon.name }}</h3>
+            <a href="{% url 'Pokemons:add_pokemon' pokemon.id %}">
+            <button>Добавить</button>
+            </a>
+        </div>
+        {% endfor %}
     </div>
-    {% endfor %}
-    <h2>Покемоны на выбор:</h2>
-    {% for pokemon in other_pokemons %}
-    <div class="pokemon" id="pokemon-{{pokemon.id}}">
-        <h3>{{ pokemon.name }}</h3>
-        <a href="{% url 'Pokemons:add_pokemon' pokemon.id %}">
-        <button>Добавить</button>
-        </a>
-    </div>
-    {% endfor %}
-</div>
+</section>
+<section>
+    <form id="find_pokemon" action="{% url 'Pokemon:find_pokemon'  %}" method="post" name="find_pokemon">
+        {% csrf token %}
+        <label for="pokemon" id="label_pokemon">Покемон:   </label>
+        <input type="text" name="pokemon" id="pokemon_box">
+        <input type="submit" name="submit" id="find" value="Найти и добавить">
+        {% if message %}
+        <p id="message">{{message}}</p>
+        {% endif %}
+    </form>
+</section>
 {% endblock %}

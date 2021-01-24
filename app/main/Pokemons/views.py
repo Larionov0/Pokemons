@@ -15,5 +15,18 @@ def main_page(request):
 @login_required(login_url='/auth_sys/login')
 def add_pokemon(request, pokemon_id):
     profile = request.user.userprofile
-    profile.pokemons.add(Pokemon.objects.get(id=pokemon_id))
+    try:
+        profile.pokemons.add(Pokemon.objects.get(id=pokemon_id))
+    except:
+        pass
+    return redirect('Pokemons:main')
+
+
+@login_required(login_url='/auth_sys/login')
+def remove_pokemon(request, pokemon_id):
+    profile = request.user.userprofile
+    try:
+        profile.pokemons.remove(Pokemon.objects.get(id=pokemon_id))
+    except:
+        pass
     return redirect('Pokemons:main')
