@@ -1,0 +1,27 @@
+{% extends 'base.html' %}
+
+{% block title %}
+<title>Main page</title>
+{% endblock %}
+
+{% block content %}
+<h1>Добро пожаловать в мир покемонов!</h1>
+<div>
+    <h2>Ваши покемоны:</h2>
+    {% for pokemon in pokemons %}
+    <div class="pokemon" id="pokemon-{{pokemon.id}}">
+        <h3>{{ pokemon.name }}</h3>
+        <button>Удалить</button>
+    </div>
+    {% endfor %}
+    <h2>Покемоны на выбор:</h2>
+    {% for pokemon in other_pokemons %}
+    <div class="pokemon" id="pokemon-{{pokemon.id}}">
+        <h3>{{ pokemon.name }}</h3>
+        <a href="{% url 'Pokemons:add_pokemon' pokemon.id %}">
+        <button>Добавить</button>
+        </a>
+    </div>
+    {% endfor %}
+</div>
+{% endblock %}
