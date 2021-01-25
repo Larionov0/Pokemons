@@ -6,5 +6,6 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('pokemons/', include('Pokemons.urls')),
     path('auth/', include('auth_sys.urls')),
-    path('', RedirectView.as_view(url='/pokemons/main', permanent=True))
+    path('', RedirectView.as_view(url='/pokemons/main', permanent=True)),
+    path('api/v1/', include('APIv1.urls'))
 ]

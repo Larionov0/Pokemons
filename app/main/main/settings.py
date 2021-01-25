@@ -25,7 +25,8 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'rest_framework',
     'Pokemons',
-    'auth_sys'
+    'auth_sys',
+    'APIv1'
 ]
 
 MIDDLEWARE = [

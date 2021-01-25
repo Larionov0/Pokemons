@@ -10,3 +10,7 @@ class UserProfile(models.Model):
     def __str__(self):
         return f"Profile {self.user.username}"
 
+    @property
+    def username(self):
+        return self.user.username
+
