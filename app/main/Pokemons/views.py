@@ -47,4 +47,5 @@ def create_context(request):
     profile = request.user.userprofile
     context['pokemons'] = profile.pokemons.all()
     context['other_pokemons'] = Pokemon.get_or_create_other_pokemons(profile)
+    context['username'] = request.user.username
     return context

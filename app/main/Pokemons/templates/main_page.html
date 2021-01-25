@@ -2,20 +2,23 @@
 
 {% block title %}
 <title>Main page</title>
+{% load static %}
+<link rel="stylesheet" type="text/css" href="{% static 'CSS/main_page.css' %}">
 {% endblock %}
 
 {% block content %}
-<section>
-    <h1>Добро пожаловать в мир покемонов!</h1>
-    <div>
-        <h2>Ваши покемоны:</h2>
+<section class="container">
+    <h1 class="center">Добро пожаловать в мир покемонов!</h1>
+    <h2 id='user' class='center'>{{username}}</h2>
+    <div class="center">
+        <h2 class="">Ваши покемоны:</h2>
         {% for pokemon in pokemons %}
         <div class="pokemon" id="pokemon-{{pokemon.id}}">
             <h3>{{ pokemon.name }}</h3>
             <a href="{% url 'Pokemons:remove_pokemon' pokemon.id %}">
             <button>Удалить</button>
             </a>
-        </div>
+        </div class="">
         {% endfor %}
         <h2>Предлагаем вам:</h2>
         {% for pokemon in other_pokemons %}
@@ -28,17 +31,19 @@
         {% endfor %}
     </div>
 </section>
-<section>
+<section class="container">
     <br/>
-    <p>Здесь вы можете найти покемона по имени.<br/>Просто введите его имя и нажмите "Найти и добавить".</p>
-    <form id="find_pokemon" action="{% url 'Pokemons:find_pokemon'  %}" method="post" name="find_pokemon">
-        {% csrf_token %}
-        <label for="pokemon_name" id="label_pokemon">Имя покемона:   </label>
-        <input type="text" name="pokemon_name" id="pokemon_box">
-        <input type="submit" name="submit" id="find" value="Найти и добавить">
-        {% if message %}
-        <p id="message">{{message}}</p>
-        {% endif %}
-    </form>
+    <div class="center">
+        <p>Здесь вы можете найти покемона по имени.<br/>Просто введите его имя и нажмите "Найти и добавить".</p>
+        <form id="find_pokemon" action="{% url 'Pokemons:find_pokemon'  %}" method="post" name="find_pokemon">
+            {% csrf_token %}
+            <label for="pokemon_name" id="label_pokemon">Имя покемона:   </label>
+            <input type="text" name="pokemon_name" id="pokemon_box">
+            <input type="submit" name="submit" id="find" value="Найти и добавить">
+            {% if message %}
+            <p id="message">{{message}}</p>
+            {% endif %}
+        </form>
+    </div>
 </section>
 {% endblock %}
