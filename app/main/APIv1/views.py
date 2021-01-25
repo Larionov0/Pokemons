@@ -8,7 +8,6 @@ from .serializers import UserProfileSerializer
 
 @api_view(['GET'])
 def users(request):
-    print('TEST')
     user_profiles = UserProfile.objects.all()
     serializer = UserProfileSerializer(user_profiles, many=True)
 
