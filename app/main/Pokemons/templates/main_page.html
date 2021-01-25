@@ -38,7 +38,7 @@
 <section class="container">
     <br/>
     <div class="center">
-        <p>Здесь вы можете найти покемона по имени.<br/>Просто введите его имя и нажмите "Найти и добавить".</p>
+        <p>Здесь вы можете найти покемона по имени.<br/>Просто введите его имя и нажмите "Найти и добавить".<br/>(покемонов в базе больше 900)</p>
         <form id="find_pokemon" action="{% url 'Pokemons:find_pokemon'  %}" method="post" name="find_pokemon">
             {% csrf_token %}
             <label for="pokemon_name" id="label_pokemon">Имя покемона:   </label>

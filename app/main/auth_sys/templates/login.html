@@ -23,4 +23,5 @@
         <br><label class="error">{{ login_error }}</label>
     {% endif %}
 </form>
+<a href="{% url 'auth_sys:register' %}"><button>Регистрация</button></a>
 {% endblock %}

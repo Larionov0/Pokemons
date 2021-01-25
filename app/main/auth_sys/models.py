@@ -7,3 +7,6 @@ class UserProfile(models.Model):
     user = models.OneToOneField(User, models.CASCADE)
     pokemons = models.ManyToManyField(Pokemon, blank=True)
 
+    def __str__(self):
+        return f"Profile {self.user.username}"
+

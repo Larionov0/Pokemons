@@ -1,6 +1,8 @@
 from django.shortcuts import redirect, render
 from django.contrib import auth
 from .models import UserProfile
+from django.views.generic.edit import FormView
+from django.contrib.auth.forms import UserCreationForm
 
 
 def login(request):
@@ -33,3 +35,18 @@ def register(request):
 def logout(request):
     auth.logout(request)
     return redirect("auth_sys:login")
+
+
+class RegisterFormView(FormView):
+    form_class = UserCreationForm
+    success_url = '/auth/login/'
+
+    # Шаблон, который будет использоваться при отображении представления.
+    template_name = "sign_up.html"
+
+    def form_valid(self, form):
+        # Создаём пользователя, если данные в форму были введены корректно.
+        form.save()
+
+        return super(RegisterFormView, self).form_valid(form)
+
