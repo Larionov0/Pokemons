@@ -3,13 +3,13 @@ from django.contrib.auth.decorators import login_required
 from .models import *
 
 
-@login_required(login_url='/auth_sys/login')
+@login_required(login_url='/auth/login')
 def main_page(request):
     context = create_context(request)
     return render(request, 'main_page.html', context)
 
 
-@login_required(login_url='/auth_sys/login')
+@login_required(login_url='/auth/login')
 def add_pokemon(request, pokemon_id):
     profile = request.user.userprofile
     try:
@@ -19,7 +19,7 @@ def add_pokemon(request, pokemon_id):
     return redirect('Pokemons:main')
 
 
-@login_required(login_url='/auth_sys/login')
+@login_required(login_url='/auth/login')
 def remove_pokemon(request, pokemon_id):
     profile = request.user.userprofile
     try:
@@ -29,7 +29,7 @@ def remove_pokemon(request, pokemon_id):
     return redirect('Pokemons:main')
 
 
-@login_required(login_url='/auth_sys/login')
+@login_required(login_url='/auth/login')
 def find_pokemon(request):
     if request.POST:
         pokemon_name = request.POST.get('pokemon_name')

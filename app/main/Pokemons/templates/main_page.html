@@ -9,20 +9,24 @@
 {% block content %}
 <section class="container">
     <h1 class="center">Добро пожаловать в мир покемонов!</h1>
-    <h2 id='user' class='center'>{{username}}</h2>
+    <div id='user-box' class="center">
+        <h2 id='user' class='center'>{{username}}</h2>
+        <a href="{% url 'auth_sys:logout' %}"><button>Выйти</button></a>
+    </div>
     <div class="center">
         <h2 class="">Ваши покемоны:</h2>
         {% for pokemon in pokemons %}
-        <div class="pokemon" id="pokemon-{{pokemon.id}}">
+        <div class="pokemon my" id="pokemon-{{pokemon.id}}">
             <h3>{{ pokemon.name }}</h3>
             <a href="{% url 'Pokemons:remove_pokemon' pokemon.id %}">
             <button>Удалить</button>
             </a>
         </div class="">
         {% endfor %}
+        <br/><br/>
         <h2>Предлагаем вам:</h2>
         {% for pokemon in other_pokemons %}
-        <div class="pokemon" id="pokemon-{{pokemon.id}}">
+        <div class="pokemon not_my" id="pokemon-{{pokemon.id}}">
             <h3>{{ pokemon.name }}</h3>
             <a href="{% url 'Pokemons:add_pokemon' pokemon.id %}">
             <button>Добавить</button>

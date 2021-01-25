@@ -28,3 +28,8 @@ def login_handler(request):
 
 def register(request):
     pass
+
+
+def logout(request):
+    auth.logout(request)
+    return redirect("auth_sys:login")
